@@ -1,4 +1,4 @@
-package javadocextender;
+package net.dreiucker.javadocextender;
 
 import java.util.List;
 

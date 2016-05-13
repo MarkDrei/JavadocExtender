@@ -1,4 +1,4 @@
-package javadocextender;
+package net.dreiucker.javadocextender;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

@@ -7,7 +7,7 @@
       <javaCompletionProposalComputer
             activate="false"
             categoryId="org.eclipse.jdt.ui.defaultProposalCategory"
-            class="javadocextender.JavadocCompletionProposalComputer"
+            class="net.dreiucker.javadocextender.JavadocCompletionProposalComputer"
             needsSortingAfterFiltering="false">
       </javaCompletionProposalComputer>
    </extension>
