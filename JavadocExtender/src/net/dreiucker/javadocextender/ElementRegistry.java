@@ -42,8 +42,10 @@ public class ElementRegistry {
 	 */
 	static ElementRegistry getInstance() {
 		if (instance == null) {
-			synchronized (instance) {
-				instance = new ElementRegistry();
+			synchronized(ElementRegistry.class) {
+				if (instance == null) {
+					instance = new ElementRegistry();
+				}
 			}
 		}
 		return instance;
