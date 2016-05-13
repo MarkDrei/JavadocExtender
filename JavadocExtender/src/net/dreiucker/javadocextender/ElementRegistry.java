@@ -110,6 +110,21 @@ public class ElementRegistry {
 		}
 		return result;
 	}
+
+	public List<String> getAllKnownValues(String tagname, String prefix) {
+		KnownJavaTag knownTags = tags.get(tagname);
+		ArrayList<String> result = new ArrayList<>();
+		
+		if (knownTags != null) {
+			for(String string : knownTags.knownStrings) {
+				if (string.startsWith(prefix)) {
+					result.add(string);
+				}
+			}
+		}
+		
+		return result;
+	}
 	
 
 }
