@@ -9,7 +9,7 @@ import java.util.Set;
  * @author Mark
  *
  */
-public interface ElementProvider {
+public interface IElementProvider {
 
 	/**
 	 * Report all javadoc tags which are supported by this element provider.

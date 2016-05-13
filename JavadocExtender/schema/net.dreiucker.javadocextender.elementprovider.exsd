@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":net.dreiucker.javadocextender.extensionpoint.ElementProvider"/>
+                  <meta.attribute kind="java" basedOn=":net.dreiucker.javadocextender.extensionpoint.IElementProvider"/>
                </appinfo>
             </annotation>
          </attribute>
