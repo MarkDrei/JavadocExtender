@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="net.dreiucker.javadocextender.elementprovider" name="JavadocElementProvider" schema="schema/net.dreiucker.javadocextender.elementprovider.exsd"/>
    <extension
          id="id1"
          point="org.eclipse.jdt.ui.javaCompletionProposalComputer">
       <javaCompletionProposalComputer
-            activate="false"
+            activate="true"
             categoryId="org.eclipse.jdt.ui.defaultProposalCategory"
             class="net.dreiucker.javadocextender.JavadocCompletionProposalComputer"
             needsSortingAfterFiltering="false">
+         <partition
+               type="__java_javadoc">
+         </partition>
       </javaCompletionProposalComputer>
    </extension>
 
