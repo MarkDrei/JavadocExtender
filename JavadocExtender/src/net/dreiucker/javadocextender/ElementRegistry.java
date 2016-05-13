@@ -1,5 +1,8 @@
 package net.dreiucker.javadocextender;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,7 +38,7 @@ public class ElementRegistry {
 
 	private static ElementRegistry instance;
 
-	Map<String, KnownJavaTag> tags;
+	private Map<String, KnownJavaTag> tags;
 
 	/**
 	 * @return the singleton instance of the registry
@@ -55,17 +58,19 @@ public class ElementRegistry {
 	 * Not to be called by clients
 	 */
 	private ElementRegistry() {
+		tags = new HashMap<>();
 		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor(PROVIDER_ID);
 		for (IConfigurationElement element : configurationElements) {
 			try {
-				Object extension = element.createExecutableExtension("class");
+				Object extension = element.createExecutableExtension("providerclass");
 				if (extension instanceof IElementProvider) {
 					addContributions((IElementProvider) extension);
 				}
 
 			} catch (CoreException e) {
 				System.err.println("Failed to create executable extension: " + e.getLocalizedMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -90,5 +95,21 @@ public class ElementRegistry {
 			}
 		}
 	}
+	
+	/**
+	 * Looks up all tags which start with the given prefix
+	 * @param prefix without @ sign
+	 * @return all tags which start with the given prefix
+	 */
+	public List<String> getAllTagsWithPrefix(String prefix) {
+		ArrayList<String> result = new ArrayList<String>();
+		for (String tag : tags.keySet()) {
+			if (tag.startsWith(prefix)) {
+				result.add(tag);
+			}
+		}
+		return result;
+	}
+	
 
 }
