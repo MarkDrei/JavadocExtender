@@ -15,5 +15,17 @@
          </partition>
       </javaCompletionProposalComputer>
    </extension>
+   <extension
+         point="org.eclipse.jdt.core.compilationParticipant">
+      <compilationParticipant
+            class="net.dreiucker.javadocextender.JavadocCompilationParticipant"
+            createsProblems="true"
+            id="JavadocExtender.compilationParticipant"
+            modifiesEnvironment="false">
+         <managedMarker
+               markerType="JavadocExtender.unknownReferenceMarker">
+         </managedMarker>
+      </compilationParticipant>
+   </extension>
 
 </plugin>
