@@ -13,11 +13,11 @@ import net.dreiucker.javadocextender.extensionpoint.IElementProvider;
  * @author Mark
  *
  */
-public class DummyElementProvider implements IElementProvider {
+public class DummyElementProvider3 implements IElementProvider {
 	
-	private final String VALID_TAG = "dummy.Tag";
+	private final String VALID_TAG = "prefixAnotherTag";
 
-	public DummyElementProvider() {
+	public DummyElementProvider3() {
 	}
 
 	@Override
@@ -28,12 +28,15 @@ public class DummyElementProvider implements IElementProvider {
 	@Override
 	public Set<String> getKnownElements() {
 		HashSet<String> set = new HashSet<>();
+		set.add("ValidElement1");
+		set.add("ValidElement2");
+		set.add("ValidElement3");
 		return set;
 	}
 
 	@Override
 	public boolean unknownElementsAllowed() {
-		return true;
+		return false;
 	}
 
 	@Override

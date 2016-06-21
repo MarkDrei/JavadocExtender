@@ -28,17 +28,11 @@ import net.dreiucker.javadocextender.extensionpoint.IElementProvider;
  */
 public class ElementRegistry {
 
-	private class KnownJavaTag {
-		// known strings behind the @tag
-		Set<String> knownStrings;
-		boolean unknownStringsAllowed;
-	}
-
 	public final static String PROVIDER_ID = "net.dreiucker.javadocextender.elementprovider";
 
 	private static ElementRegistry instance;
 
-	private Map<String, KnownJavaTag> tags;
+	private Map<String, KnownJavaTag> knownTags;
 
 	/**
 	 * @return the singleton instance of the registry
@@ -58,7 +52,7 @@ public class ElementRegistry {
 	 * Not to be called by clients
 	 */
 	private ElementRegistry() {
-		tags = new HashMap<>();
+		knownTags = new HashMap<>();
 		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor(PROVIDER_ID);
 		for (IConfigurationElement element : configurationElements) {
@@ -77,22 +71,12 @@ public class ElementRegistry {
 	}
 
 	private void addContributions(IElementProvider provider) {
-		Set<String> validTags = provider.getValidTags();
-		for (String validTag : validTags) {
-			Set<String> knownElements = provider.getKnownElements(validTag);
-			if (tags.containsKey(validTag)) {
-
-				System.out.println("WARNING: Tag " + validTag + " is already known. Contents will be merged");
-				
-				KnownJavaTag knownTag = tags.get(validTag);
-				knownTag.knownStrings.addAll(knownElements);
-				knownTag.unknownStringsAllowed |= provider.unknownElementsAllowed(validTag);
-			} else {
-				KnownJavaTag knownJavaTag = new KnownJavaTag();
-				knownJavaTag.knownStrings = knownElements;
-				knownJavaTag.unknownStringsAllowed = provider.unknownElementsAllowed(validTag);
-				tags.put(validTag, knownJavaTag);
-			}
+		KnownJavaTag knownJavaTag = new KnownJavaTag(provider);
+		
+		String tag = provider.getTag();
+		KnownJavaTag putResult = knownTags.put(tag, knownJavaTag);
+		if (putResult != null && !(provider.equals(putResult.getProvider()))) {
+			System.out.println("JavadocProvider WARNING: Javadoc tag \"" + tag + "\" is already known. Contents will be overwritten");
 		}
 	}
 	
@@ -103,7 +87,7 @@ public class ElementRegistry {
 	 */
 	public List<String> getAllTagsWithPrefix(String prefix) {
 		ArrayList<String> result = new ArrayList<String>();
-		for (String tag : tags.keySet()) {
+		for (String tag : knownTags.keySet()) {
 			if (tag.startsWith(prefix)) {
 				result.add(tag);
 			}
@@ -112,13 +96,16 @@ public class ElementRegistry {
 	}
 
 	public List<String> getAllKnownValues(String tagname, String prefix) {
-		KnownJavaTag knownTags = tags.get(tagname);
+		KnownJavaTag knownTag = knownTags.get(tagname);
 		ArrayList<String> result = new ArrayList<>();
 		
-		if (knownTags != null) {
-			for(String string : knownTags.knownStrings) {
-				if (string.startsWith(prefix)) {
-					result.add(string);
+		if (knownTag != null) {
+			Set<String> knownStrings = knownTag.getKnownStrings();
+			if (knownStrings != null) {
+				for(String string : knownStrings) {
+					if (string.startsWith(prefix)) {
+						result.add(string);
+					}
 				}
 			}
 		}
@@ -126,5 +113,4 @@ public class ElementRegistry {
 		return result;
 	}
 	
-
 }
