@@ -1,5 +1,7 @@
 package net.dreiucker.javadocextender;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import net.dreiucker.javadocextender.extensionpoint.IElementChangeListener;
@@ -47,17 +49,40 @@ class KnownJavaTag implements IElementChangeListener {
 		return provider;
 	}
 	
-	public Set<String> getKnownStrings() {
+	@Override
+	public void knownElementsChanged() {
+		isKnownStringsUpToDate = false;
+	}
+
+	public boolean isKnownValue(String value) {
+		updateKnownStrings();
+		return knownStrings.contains(value);
+	}
+
+	private void updateKnownStrings() {
 		if (knownStrings == null || !isKnownStringsUpToDate) {
 			knownStrings = provider.getKnownElements();
 			isKnownStringsUpToDate = true;
 		}
-		return knownStrings;
+		if (knownStrings == null) {
+			knownStrings = new HashSet<>();
+		}
 	}
-	
-	@Override
-	public void knownElementsChanged() {
-		isKnownStringsUpToDate = false;
+
+	/**
+	 * Completes all proposals which start with the given prefix
+	 * @param prefix
+	 * @return
+	 */
+	public Collection<? extends String> getCompletionProposals(String prefix) {
+		updateKnownStrings();
+		HashSet<String> result = new HashSet<>();
+		for(String string : knownStrings) {
+			if (string.startsWith(prefix)) {
+				result.add(string);
+			}
+		}
+		return result;
 	}
 
 }

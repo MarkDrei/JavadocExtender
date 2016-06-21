@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -100,17 +99,31 @@ public class ElementRegistry {
 		ArrayList<String> result = new ArrayList<>();
 		
 		if (knownTag != null) {
-			Set<String> knownStrings = knownTag.getKnownStrings();
-			if (knownStrings != null) {
-				for(String string : knownStrings) {
-					if (string.startsWith(prefix)) {
-						result.add(string);
-					}
-				}
-			}
+			result.addAll(knownTag.getCompletionProposals(prefix));
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * Gets the element provider, if there is one which handles exactly this tag
+	 * and element combination
+	 * 
+	 * @param tagname
+	 *            The name of the tag, without the preceding "@"
+	 * @param value
+	 *            The value behind the tag
+	 * @return The IElementProvider which can provide additional information, or
+	 *         <code>null</code> if none exists
+	 */
+	public IElementProvider getProviderForTag(String tagname, String value) {
+		KnownJavaTag knownTag = knownTags.get(tagname);
+		if (knownTag != null) {
+			if (knownTag.isKnownValue(value)) {
+				return knownTag.getProvider();
+			}
+		}
+		return null;
 	}
 	
 }
