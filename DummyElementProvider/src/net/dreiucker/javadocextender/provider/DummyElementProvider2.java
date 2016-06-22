@@ -48,5 +48,9 @@ public class DummyElementProvider2 implements IElementProvider {
 	public void removeElementsChangedListener(IElementChangeListener listener) {
 		// no, changes are not supported, so no need for listeners
 	}
-
+	
+	@Override
+	public void openEditor(String text) {
+		// no dummy implementation
+	}
 }

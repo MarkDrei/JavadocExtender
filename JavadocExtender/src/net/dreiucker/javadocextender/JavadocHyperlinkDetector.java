@@ -96,7 +96,6 @@ public class JavadocHyperlinkDetector extends AbstractHyperlinkDetector {
 		}
 		
 		if (linkRegionEnd >= 0) {
-			//TODO remove
 			if (DEBUG) {
 				System.out.println(" MDD tag name text: \"" + tagName + "\"");
 				System.out.println(" MDD hyperling detection text: \"" + linkText + "\"");
@@ -106,7 +105,7 @@ public class JavadocHyperlinkDetector extends AbstractHyperlinkDetector {
 					tagName.toString(), linkText.toString());
 			if (provider != null) {
 				IRegion hyperlingRegion = new Region(linkRegionStart, linkRegionEnd - linkRegionStart + 1); 
-				return new IHyperlink[] {new JavadocHyperlink(hyperlingRegion, linkText.toString())};
+				return new IHyperlink[] {new JavadocHyperlink(hyperlingRegion, linkText.toString(), provider)};
 			}
 		}
 		

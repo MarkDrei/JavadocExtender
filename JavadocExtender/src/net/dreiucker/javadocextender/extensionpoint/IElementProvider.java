@@ -40,4 +40,6 @@ public interface IElementProvider {
 	void addElementsChangedListener(IElementChangeListener listener);
 	
 	void removeElementsChangedListener(IElementChangeListener listener);
+
+	void openEditor(String text);
 }

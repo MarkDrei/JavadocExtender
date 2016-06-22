@@ -49,4 +49,8 @@ public class DummyElementProvider3 implements IElementProvider {
 		// no, changes are not supported, so no need for listeners
 	}
 
+	@Override
+	public void openEditor(String text) {
+		// no dummy implementation
+	}
 }
