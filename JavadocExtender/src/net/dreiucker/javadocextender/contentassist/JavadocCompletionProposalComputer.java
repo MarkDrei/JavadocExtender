@@ -1,4 +1,4 @@
-package net.dreiucker.javadocextender;
+package net.dreiucker.javadocextender.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
+
+import net.dreiucker.javadocextender.ElementRegistry;
 
 public class JavadocCompletionProposalComputer implements IJavaCompletionProposalComputer {
 

@@ -8,7 +8,7 @@
       <javaCompletionProposalComputer
             activate="true"
             categoryId="org.eclipse.jdt.ui.defaultProposalCategory"
-            class="net.dreiucker.javadocextender.JavadocCompletionProposalComputer"
+            class="net.dreiucker.javadocextender.contentassist.JavadocCompletionProposalComputer"
             needsSortingAfterFiltering="false">
          <partition
                type="__java_javadoc">
@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.jdt.core.compilationParticipant">
       <compilationParticipant
-            class="net.dreiucker.javadocextender.JavadocCompilationParticipant"
+            class="net.dreiucker.javadocextender.marker.JavadocCompilationParticipant"
             createsProblems="true"
             id="JavadocExtender.compilationParticipant"
             modifiesEnvironment="false">
@@ -31,11 +31,21 @@
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
             activate="true"
-            class="net.dreiucker.javadocextender.JavadocHyperlinkDetector"
+            class="net.dreiucker.javadocextender.hyperlink.JavadocHyperlinkDetector"
             id="net.dreiucker.JavadocExtender.hyperlinkDetector"
             name="JavadocHyperlinkDetector"
             targetId="org.eclipse.jdt.ui.javaCode">
       </hyperlinkDetector>
+   </extension>
+   <extension
+         id="JavadocExtender.unknownReferenceMarker"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
    </extension>
 
 </plugin>

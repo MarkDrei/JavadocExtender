@@ -36,7 +36,7 @@ public class ElementRegistry {
 	/**
 	 * @return the singleton instance of the registry
 	 */
-	static ElementRegistry getInstance() {
+	public static ElementRegistry getInstance() {
 		if (instance == null) {
 			synchronized(ElementRegistry.class) {
 				if (instance == null) {
@@ -105,6 +105,21 @@ public class ElementRegistry {
 		return result;
 	}
 	
+	public boolean isKnownTag(String tagName) {
+		return knownTags.containsKey(tagName);
+	}
+	
+	public boolean isElementValid(String tagName, String text) {
+		KnownJavaTag knownJavaTag = knownTags.get(tagName);
+		if (knownJavaTag != null) {
+			if (knownJavaTag.isUnknownStringAllowed()) {
+				return true;
+			}
+			return knownJavaTag.isKnownValue(text);
+		}
+		return false;
+	}
+	
 	/**
 	 * Gets the element provider, if there is one which handles exactly this tag
 	 * and element combination
@@ -125,5 +140,6 @@ public class ElementRegistry {
 		}
 		return null;
 	}
+
 	
 }

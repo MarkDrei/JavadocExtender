@@ -1,4 +1,4 @@
-package net.dreiucker.javadocextender;
+package net.dreiucker.javadocextender.hyperlink;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -8,6 +8,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
+import net.dreiucker.javadocextender.ElementRegistry;
 import net.dreiucker.javadocextender.extensionpoint.IElementProvider;
 
 public class JavadocHyperlinkDetector extends AbstractHyperlinkDetector {

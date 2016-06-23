@@ -1,4 +1,4 @@
-package net.dreiucker.javadocextender;
+package net.dreiucker.javadocextender.hyperlink;
 
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
