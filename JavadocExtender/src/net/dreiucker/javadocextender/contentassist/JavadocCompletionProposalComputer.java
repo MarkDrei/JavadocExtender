@@ -15,7 +15,9 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import net.dreiucker.javadocextender.ElementRegistry;
 
 public class JavadocCompletionProposalComputer implements IJavaCompletionProposalComputer {
-
+	
+	private static final boolean DEBUG = false;
+	
 	ElementRegistry registry;
 
 	public JavadocCompletionProposalComputer() {
@@ -38,7 +40,10 @@ public class JavadocCompletionProposalComputer implements IJavaCompletionProposa
 			// simply no proposal
 			return result;
 		}
-		System.out.println("computing completion proposals based on prefix " + prefix);
+		
+		if (DEBUG) {
+			System.out.println("computing completion proposals based on prefix " + prefix);
+		}
 
 		if (atBeforePrefix(prefix, context)) {
 			// found @prefix, check for proposals based on that
