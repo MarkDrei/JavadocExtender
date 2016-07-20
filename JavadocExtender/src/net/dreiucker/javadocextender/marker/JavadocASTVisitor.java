@@ -53,10 +53,14 @@ public class JavadocASTVisitor extends ASTVisitor {
 
 	@Override
 	public boolean visit(TagElement node) {
-		String tagName = node.getTagName().substring(1);
-		if (ElementRegistry.getInstance().isKnownTag(tagName)) {
-			currentJavadocTag = tagName;
-			return true;
+		String tagName = node.getTagName();
+		if (tagName != null) {
+			// remove the @ sign
+			tagName = tagName.substring(1);
+			if (ElementRegistry.getInstance().isKnownTag(tagName)) {
+				currentJavadocTag = tagName;
+				return true;
+			}
 		}
 		currentJavadocTag = null;
 		return false;
