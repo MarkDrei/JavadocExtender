@@ -16,7 +16,7 @@ import net.dreiucker.javadocextender.ElementRegistry;
 
 public class JavadocCompletionProposalComputer implements IJavaCompletionProposalComputer {
 	
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 	
 	ElementRegistry registry;
 
@@ -147,9 +147,15 @@ public class JavadocCompletionProposalComputer implements IJavaCompletionProposa
 		List<ICompletionProposal> proposals = new ArrayList<>();
 		if (choices != null) {
 			for (String choice : choices) {
-				CompletionProposal proposal = new CompletionProposal(choice, prefixStart,
-						prefix.length(), prefixStart + choice.length(), null, 
-						choice, null, "Inserts the text \"" + choice + "\".");
+				CompletionProposal proposal = new CompletionProposal(
+						choice,
+						prefixStart,
+						prefix.length(),
+						choice.length(),
+						null, 
+						choice,
+						null,
+						"Inserts the text \"" + choice + "\".");
 				proposals.add(proposal);
 			}
 		}
