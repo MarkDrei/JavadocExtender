@@ -53,4 +53,9 @@ public class DummyElementProvider2 implements IElementProvider {
 	public void openEditor(String text) {
 		// no dummy implementation
 	}
+
+	@Override
+	public String getElementDescription(String element) {
+		return "DummyElementProvider2's description for " + element;
+	}
 }

@@ -37,9 +37,43 @@ public interface IElementProvider {
 	 */
 	boolean unknownElementsAllowed();
 	
+	/**
+	 * Adds a listener who needs to be informed when the list of known elements
+	 * changes 
+	 * 
+	 * @param The listener to add
+	 */
 	void addElementsChangedListener(IElementChangeListener listener);
 	
+	/**
+	 * Remove a formerly registered listener.
+	 * If the listener was never registered, then this is a NOP.
+	 * 
+	 * @param listener The listener to remove
+	 */
 	void removeElementsChangedListener(IElementChangeListener listener);
-
-	void openEditor(String text);
+	
+	/**
+	 * Navigate to the given element.
+	 * This may imply opening the an editor or a similar action.
+	 * 
+	 * Can be implemented as a NOP if this action is not supported, though this leaves
+	 * a awkward user interface...
+	 *  
+	 * @param element The text/name of the element whose editor is to be opened
+	 */
+	void openEditor(String element);
+	
+	/**
+	 * Get a helpful text which is displayed for the user when picking an element via the
+	 * auto-complete feature.
+	 * The text should explain the element to the user.
+	 * 
+	 *  <code>null</code> can be returned in case no explanation is available, in this
+	 *  case a default text is added.
+	 * 
+	 * @param element The element whose description is requested
+	 * @return A descriptive text or <code>null</code>, if no description is available
+	 */
+	String getElementDescription(String element);
 }

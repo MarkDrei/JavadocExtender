@@ -147,9 +147,14 @@ public class JavadocCompletionProposalComputer implements IJavaCompletionProposa
 		List<ICompletionProposal> proposals = new ArrayList<>();
 		if (choices != null) {
 			for (String choice : choices) {
+				String description = registry.getDescription(tagname, choice);
+				if (description == null) {
+					description = "Inserts the text \"" + choice + "\".";
+				}
+				
 				CompletionProposal proposal = new CompletionProposal(choice, prefixStart,
 						prefix.length(), prefixStart + choice.length(), null, 
-						choice, null, "Inserts the text \"" + choice + "\".");
+						choice, null, description);
 				proposals.add(proposal);
 			}
 		}

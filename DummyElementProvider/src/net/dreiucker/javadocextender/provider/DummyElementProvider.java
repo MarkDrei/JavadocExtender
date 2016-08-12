@@ -51,4 +51,9 @@ public class DummyElementProvider implements IElementProvider {
 		// no dummy implementation
 	}
 
+	@Override
+	public String getElementDescription(String element) {
+		return null;
+	}
+
 }

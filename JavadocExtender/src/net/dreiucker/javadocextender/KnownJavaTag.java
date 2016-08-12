@@ -84,5 +84,17 @@ class KnownJavaTag implements IElementChangeListener {
 		}
 		return result;
 	}
+	
+	/**
+	 * Get the description for an element
+	 * 
+	 * @param value
+	 *            The value whose description is requested
+	 * @return The description for an element or <code>null</code> if no
+	 *         description is available
+	 */
+	public String getDescription(String value) {
+		return provider.getElementDescription(value);
+	}
 
 }
