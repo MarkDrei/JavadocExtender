@@ -141,5 +141,18 @@ public class ElementRegistry {
 		return null;
 	}
 
-	
+	/**
+	 * Get the description for a value
+	 * 
+	 * @param tagname The name of the tag to which the value belongs 
+	 * @param value the value
+	 * @return a description for the value or null, if none is available
+	 */
+	public String getDescription(String tagname, String value) {
+		KnownJavaTag knownTag = knownTags.get(tagname);
+		if (knownTag != null) {
+			return knownTag.getDescription(value);
+		}
+		return null;
+	}
 }
