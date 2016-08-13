@@ -34,6 +34,7 @@ class KnownJavaTag implements IElementChangeListener {
 		}
 		this.provider = provider;
 		isKnownStringsUpToDate = false;
+		provider.addElementsChangedListener(this);
 	}
 	
 	/**

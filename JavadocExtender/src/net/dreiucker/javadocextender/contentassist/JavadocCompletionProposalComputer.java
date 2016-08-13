@@ -16,7 +16,7 @@ import net.dreiucker.javadocextender.ElementRegistry;
 
 public class JavadocCompletionProposalComputer implements IJavaCompletionProposalComputer {
 	
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	
 	ElementRegistry registry;
 
