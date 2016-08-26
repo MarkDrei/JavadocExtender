@@ -8,6 +8,7 @@ import java.util.Map;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.RegistryFactory;
 
 import net.dreiucker.javadocextender.extensionpoint.IElementProvider;
 
@@ -28,6 +29,8 @@ import net.dreiucker.javadocextender.extensionpoint.IElementProvider;
 public class ElementRegistry {
 
 	public final static String PROVIDER_ID = "net.dreiucker.javadocextender.elementprovider";
+
+	private static final boolean DEBUG = true;
 
 	private static ElementRegistry instance;
 
@@ -52,9 +55,12 @@ public class ElementRegistry {
 	 */
 	private ElementRegistry() {
 		knownTags = new HashMap<>();
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+		IConfigurationElement[] configurationElements =  RegistryFactory.getRegistry()
 				.getConfigurationElementsFor(PROVIDER_ID);
 		for (IConfigurationElement element : configurationElements) {
+			if (DEBUG) {
+				System.out.println("JavadocExtender registry, new configuration element: " + element);
+			}
 			try {
 				Object extension = element.createExecutableExtension("providerclass");
 				if (extension instanceof IElementProvider) {

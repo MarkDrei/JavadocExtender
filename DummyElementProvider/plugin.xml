@@ -7,5 +7,17 @@
             providerclass="net.dreiucker.javadocextender.provider.DummyElementProvider">
       </client>
    </extension>
+   <extension
+         point="net.dreiucker.javadocextender.elementprovider">
+      <client
+            providerclass="net.dreiucker.javadocextender.provider.DummyElementProvider2">
+      </client>
+   </extension>
+   <extension
+         point="net.dreiucker.javadocextender.elementprovider">
+      <client
+            providerclass="net.dreiucker.javadocextender.provider.DummyElementProvider3">
+      </client>
+   </extension>
 
 </plugin>

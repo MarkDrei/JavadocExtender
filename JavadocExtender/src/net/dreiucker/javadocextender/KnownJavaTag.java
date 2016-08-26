@@ -30,7 +30,7 @@ class KnownJavaTag implements IElementChangeListener {
 	 */
 	public KnownJavaTag(IElementProvider provider) {
 		if (provider == null) {
-			throw new IllegalArgumentException("null now allowed");
+			throw new IllegalArgumentException("null not allowed");
 		}
 		this.provider = provider;
 		isKnownStringsUpToDate = false;
